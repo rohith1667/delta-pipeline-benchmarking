@@ -74,12 +74,21 @@ We benchmarked a **synthetic transactional pipeline** simulating retail/banking 
   - [`/data/sample_customers.csv`](data/sample_customers.csv)  
   - [`/data/sample_transactions.csv`](data/sample_transactions.csv)  
 
-### Cluster Profiles
-| Profile      | Workers | Photon | Notes |
-|--------------|---------|--------|-------|
-| `dev_small`  | 2       | on/off | cheapest option for CI/small runs |
-| `dev_medium` | 4       | on/off | best balance of cost vs. performance |
-| `dev_large`  | 8       | on/off | speed-first, especially for XL datasets |
+### Clusters
+
+All benchmarks were run on Databricks AWS (i3 family nodes).  
+Photon was toggled on/off via cluster runtime settings.  
+
+| Profile      | Workers | Instance Type | DBR Version | Photon | $/hr (approx) | Notes |
+|--------------|---------|---------------|-------------|--------|---------------|-------|
+| dev_small    | 2       | i3.xlarge     | 15.3 LTS    | ON/OFF | $0.36         | Cheapest config, baseline CI/small runs |
+| dev_medium   | 4       | i3.2xlarge    | 15.3 LTS    | ON/OFF | $0.80         | Best cost vs. runtime balance |
+| dev_large    | 8       | i3.2xlarge    | 15.3 LTS    | ON/OFF | $1.60         | Fastest option, SLA-driven |
+
+**Assumptions:**  
+- Driver = same size as workers  
+- Costs = EC2 + Databricks Units (DBUs)  
+- Adaptive Query Execution (AQE) enabled in all runs  
 
 ---
 
