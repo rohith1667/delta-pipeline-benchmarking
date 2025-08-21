@@ -1,0 +1,6 @@
+run_id,dataset_label,cluster_profile,photon_enabled,aqe_enabled,shuffle_parts,rows_in,start_ts,end_ts,duration_sec,cost_usd
+r-0001,small_9m,dev_small,False,True,200,9000000,2025-08-18T10:00:00Z,2025-08-18T10:20:30Z,1230,0.85
+r-0002,small_9m,dev_small,True,True,200,9000000,2025-08-18T10:45:00Z,2025-08-18T11:01:00Z,960,0.68
+r-0003,large_142m,dev_medium,False,True,800,142000000,2025-08-18T12:00:00Z,2025-08-18T12:45:00Z,2700,7.9
+r-0004,large_142m,dev_medium,True,True,800,142000000,2025-08-18T13:00:00Z,2025-08-18T13:30:00Z,1800,4.2
+r-0005,xl_250m,dev_large,True,True,1600,250000000,2025-08-18T14:00:00Z,2025-08-18T14:35:00Z,2100,7.1
