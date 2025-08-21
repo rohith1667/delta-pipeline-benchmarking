@@ -1,10 +1,10 @@
 # ⚡ Delta Pipeline Benchmarking for Transactional Data (9M → 250M rows)
 
-This project benchmarks **Databricks Delta pipelines** on **transactional workloads** of different scales  
-(9M, 142M, 250M rows). It compares **Photon vs non-Photon execution**, cluster sizes, and cost/performance trade-offs.
+##  Executive Summary
 
-The goal: **create a right-sizing playbook** that balances runtime, cost, and throughput for real-world transactional data pipelines.
+This project benchmarks **Databricks Delta pipelines** on transactional workloads of different scales  (9M, 142M, 250M rows). It compares **Photon vs non-Photon execution**, cluster sizes, and cost/performance trade-offs.
 
+**Goal:** Create a *right-sizing playbook* that balances runtime, cost, and throughput for real-world transactional data pipelines.
 ---
 
 ## 📌 Objectives
@@ -39,6 +39,11 @@ Benching_Project/
 │   ├── 06_runtime_speedup.sql
 │   └── 07_distribution_stats.sql
 │
+│
+├── data/                  # Sample synthetic datasets
+│   ├── sample_customers.csv
+│   └── sample_transactions.csv
+│
 ├── results/
 │   ├── Delta Pipeline Benchmarking Results (9M -> 250M rows).pdf
 │   └── sample_benchmark_logs.csv
@@ -51,7 +56,30 @@ Benching_Project/
 │
 └── readme.md
 ```
+---
+## ⚙️ Workloads, Datasets & Clusters
 
+We benchmarked a **synthetic transactional pipeline** simulating retail/banking workloads  
+(customers signing up, generating purchases or payments across branches/stores).  
+
+### Data & Generation
+- **Customers table**: `customer_id`, `signup_date`, `segment`, `state`, `city`  
+- **Transactions table**: `txn_id`, `store_id`, `customer_id`, `sku`, `qty`, `price`, `amount`, `ts`, `ingest_day`  
+- **Bronze layer** (`01_data_prep_driver.ipynb`) generates both datasets.  
+- **Scales tested:**  
+  - `small_9m` (~9M rows)  
+  - `large_142m` (~142M rows)  
+  - `xl_250m` (~250M rows)  
+- **Sample datasets:**  
+  - [`/data/sample_customers.csv`](data/sample_customers.csv)  
+  - [`/data/sample_transactions.csv`](data/sample_transactions.csv)  
+
+### Cluster Profiles
+| Profile      | Workers | Photon | Notes |
+|--------------|---------|--------|-------|
+| `dev_small`  | 2       | on/off | cheapest option for CI/small runs |
+| `dev_medium` | 4       | on/off | best balance of cost vs. performance |
+| `dev_large`  | 8       | on/off | speed-first, especially for XL datasets |
 
 ---
 
@@ -158,3 +186,6 @@ This repo provides:
 - A **right-sizing playbook** for Databricks Delta pipelines
 - **Reproducibility** via sample CSV + SQL setup
 - **Business translation:** from runtime numbers → to SLA & cost savings
+
+---
+🚀 This project bridges **engineering benchmarks** with **business SLAs**, showing how to right-size Databricks Delta pipelines for both **cost efficiency** and **runtime guarantees**.
