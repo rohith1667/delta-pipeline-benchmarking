@@ -2,6 +2,10 @@
 
 ##  Executive Summary
 
+## Git Practice
+
+This change is made to practice branching, committing, and pull requests.
+
 This project benchmarks **Databricks Delta pipelines** on transactional workloads of different scales  (9M, 142M, 250M rows). It compares **Photon vs non-Photon execution**, cluster sizes, and cost/performance trade-offs.
 
 **Goal:** Create a *right-sizing playbook* that balances runtime, cost, and throughput for real-world transactional data pipelines.
